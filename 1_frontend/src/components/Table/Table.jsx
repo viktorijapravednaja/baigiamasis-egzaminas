@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 // Styles
 import { StyledTable, StyledTd, StyledTh } from "./Table.style";
@@ -7,98 +8,58 @@ import { StyledTable, StyledTd, StyledTh } from "./Table.style";
 import { Button } from "../Button/Button";
 
 export const Table = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    axios.get("http://localhost:5000/customers").then((res) => {
+      if (!res.data) {
+        setError("An error have occured.");
+      }
+      return setData(res.data.customer);
+    });
+
+    console.log(data);
+  }, []);
+
+  const deleteCustomer = (id) => {
+    axios.delete("http://localhost:5000/delete", { id }).then((res) => {
+      alert(res.data);
+    });
+  };
   return (
     <StyledTable>
-      <tr>
-        <StyledTh> Full Name</StyledTh>
-        <StyledTh>Email</StyledTh>
-        <StyledTh>Date</StyledTh>
-        <StyledTh>Time</StyledTh>
-      </tr>
-      <tr>
-        <StyledTd>Brad Pitt</StyledTd>
-        <StyledTd>cool@gmail.com</StyledTd>
-        <StyledTd>2010-20-20</StyledTd>
-        <StyledTd>10:45</StyledTd>
-        <td>
-          <Button text="Update" color={"#00674C"} />
-        </td>
-        <td>
-          <Button text="Delete" color={"#7D1713"} />
-        </td>
-      </tr>
-      <tr>
-        <StyledTd>Johnny Depp</StyledTd>
-        <StyledTd>69699@gmail.com</StyledTd>
-        <StyledTd>2010-22-22</StyledTd>
-        <StyledTd>16:45</StyledTd>
-        <td>
-          <Button text="Update" color={"#00674C"} />
-        </td>
-        <td>
-          <Button text="Delete" color={"#7D1713"} />
-        </td>
-      </tr>
-      <tr>
-        <StyledTd>Brad Pitt</StyledTd>
-        <StyledTd>cool@gmail.com</StyledTd>
-        <StyledTd>2010-20-20</StyledTd>
-        <StyledTd>10:45</StyledTd>
-        <td>
-          <Button text="Update" color={"#00674C"} />
-        </td>
-        <td>
-          <Button text="Delete" color={"#7D1713"} />
-        </td>
-      </tr>
-      <tr>
-        <StyledTd>Brad Pitt</StyledTd>
-        <StyledTd>cool@gmail.com</StyledTd>
-        <StyledTd>2010-20-20</StyledTd>
-        <StyledTd>10:45</StyledTd>
-        <td>
-          <Button text="Update" color={"#00674C"} />
-        </td>
-        <td>
-          <Button text="Delete" color={"#7D1713"} />
-        </td>
-      </tr>
-      <tr>
-        <StyledTd>Brad Pitt</StyledTd>
-        <StyledTd>cool@gmail.com</StyledTd>
-        <StyledTd>2010-20-20</StyledTd>
-        <StyledTd>10:45</StyledTd>
-        <td>
-          <Button text="Update" color={"#00674C"} />
-        </td>
-        <td>
-          <Button text="Delete" color={"#7D1713"} />
-        </td>
-      </tr>
-      <tr>
-        <StyledTd>Brad Pitt</StyledTd>
-        <StyledTd>cool@gmail.com</StyledTd>
-        <StyledTd>2010-20-20</StyledTd>
-        <StyledTd>10:45</StyledTd>
-        <td>
-          <Button text="Update" color={"#00674C"} />
-        </td>
-        <td>
-          <Button text="Delete" color={"#7D1713"} />
-        </td>
-      </tr>
-      <tr>
-        <StyledTd>Brad Pitt</StyledTd>
-        <StyledTd>cool@gmail.com</StyledTd>
-        <StyledTd>2010-20-20</StyledTd>
-        <StyledTd>10:45</StyledTd>
-        <td>
-          <Button text="Update" color={"#00674C"} />
-        </td>
-        <td>
-          <Button text="Delete" color={"#7D1713"} />
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <StyledTh> Full Name</StyledTh>
+          <StyledTh>Email</StyledTh>
+          <StyledTh>Date</StyledTh>
+          <StyledTh>Time</StyledTh>
+        </tr>
+        {data &&
+          data.map((d) => {
+            return (
+              <tr key={d._id}>
+                <StyledTd>{d.name}</StyledTd>
+                <StyledTd>{d.email}</StyledTd>
+                <StyledTd>{d.date}</StyledTd>
+                <StyledTd>{d.time}</StyledTd>
+                <td>
+                  <Button text="Update" color={"#00674C"} />
+                </td>
+                <td>
+                  <Button
+                    onCLick={deleteCustomer(d._id)}
+                    text="Delete"
+                    color={"#7D1713"}
+                  />
+                </td>
+              </tr>
+            );
+          })}
+      </tbody>
     </StyledTable>
   );
 };

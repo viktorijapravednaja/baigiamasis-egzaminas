@@ -1,0 +1,21 @@
+### -- signup new user
+POST http://localhost:5000/register
+content-type: application/json
+
+{
+    "name": "jpne zeba kalmaite",
+    "email": "zajabys@email.com",
+    "date": "200-22-22",
+    "time":"18:22"
+}
+
+
+###
+DELETE  http://localhost:5000/delete
+content-type: application/json
+{
+   "_id": "6318d34e786cebe760bc31d0",
+}
+
+###
+GET http://localhost:5000/customers
