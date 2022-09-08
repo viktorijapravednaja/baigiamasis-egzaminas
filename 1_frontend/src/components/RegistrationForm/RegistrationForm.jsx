@@ -77,7 +77,7 @@ const RegistrationForm = () => {
         {/* <StyledErrorMessage>{formErrors.date}</StyledErrorMessage> */}
 
         <StyledCenteredElements>
-          <Button color={"var(--blue)"} text={"Save"} padding={"3px 10px"} />
+          <Button color={"var(--blue)"} text={"Save"} padding={"8px 0px"} />
         </StyledCenteredElements>
       </StyledForm>
     </StyledFormContainer>

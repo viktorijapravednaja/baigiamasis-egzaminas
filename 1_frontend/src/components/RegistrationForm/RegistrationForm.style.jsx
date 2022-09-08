@@ -22,8 +22,9 @@ export const StyledFormContainer = styled.div`
 
 export const StyledForm = styled.form`
   width: 90%;
-  border: 1px solid var(--black);
-  padding: 20px;
+  box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
+  background: white;
+  padding: 30px;
   border-radius: 8px;
 `;
 
@@ -31,10 +32,10 @@ export const StyledInput = styled.input`
   padding: 10px;
   margin: 8px auto 0px auto;
   width: 100%;
-  border: 1px solid var(--black);
+  border: none;
+  border-bottom: 1px solid var(--black);
   font-size: 16px;
   font-weight: 200;
-  border-radius: 8px;
 `;
 
 export const StyledDateInput = styled.input`
@@ -55,9 +56,8 @@ export const StyledCenteredElements = styled.div`
 `;
 
 export const StyledH1 = styled.h1`
-  margin-bottom: 25px;
-  font-weight: 200;
-  border-bottom: 1px solid var(--black);
+  margin-bottom: 40px;
+  font-weight: 400;
 `;
 
 export const StyledLabel = styled.label`

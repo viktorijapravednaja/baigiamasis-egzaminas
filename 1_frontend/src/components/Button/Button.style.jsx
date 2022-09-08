@@ -11,4 +11,7 @@ export const StyledButton = styled.button`
   padding: ${(props) => props.padding};
   text-align: center;
   width: 100%;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
 `;

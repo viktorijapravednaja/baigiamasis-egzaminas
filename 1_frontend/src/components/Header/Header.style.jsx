@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const StyledHeader = styled.header`
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -18,7 +18,7 @@ const Card = ({ title, body, text, link }) => {
       <StyledH2>{title}</StyledH2>
       <StyledP>{body}</StyledP>
       <Link to={link}>
-        <Button color={"var(--blue)"} text={text} />
+        <Button color={"var(--blue)"} padding={"6px 0px"} text={text} />
       </Link>
     </StyledCard>
   );

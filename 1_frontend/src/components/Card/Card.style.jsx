@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const StyledCard = styled.div`
-  width: 100%;
+  background: white;
+  width: 90%;
   text-align: center;
   padding: 45px;
   margin: 2rem auto;
-  border: 1px solid var(--black);
+  box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
   border-radius: 8px;
   @media screen and (min-width: 468px) {
     width: 70%;
@@ -21,8 +22,7 @@ export const StyledCard = styled.div`
 
 export const StyledH2 = styled.h2`
   margin: 25px 0px;
-  font-weight: 200;
-  border-bottom: 1px solid var(--black);
+  font-weight: 400;
 `;
 
 export const StyledIcon = styled.i`
