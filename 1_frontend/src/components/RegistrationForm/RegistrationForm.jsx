@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as Yup from "yup";
+import { useState } from "react";
 
 // Style
 import {
@@ -9,16 +10,19 @@ import {
   StyledCenteredElements,
   StyledH1,
   StyledLabel,
-  // StyledErrorMessage,
+  StyledErrorMessage,
   StyledInputContainer,
   StyledDateInput,
   StyledInputDateContainer,
+  StyledConfirmationMessage,
 } from "./RegistrationForm.style";
 
 // Components
 import { Button } from "../Button/Button";
 
 const RegistrationForm = () => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [sentMessage, setSentMessage] = useState("");
   const addToList = (name, email, date, time) => {
     axios
       .post("http://localhost:5000/register", {
@@ -27,7 +31,13 @@ const RegistrationForm = () => {
         date,
         time,
       })
-      .then((res) => alert(res));
+      .then((res) => {
+        setSentMessage(res.data);
+      })
+      .catch((err) => {
+        setErrorMessage(err.response.data);
+        setSentMessage("");
+      });
   };
 
   const validation = (e) => {
@@ -43,12 +53,38 @@ const RegistrationForm = () => {
         date: Yup.string().required(),
         time: Yup.string().required(),
       });
-      console.log(schema.isValid);
+
       schema.isValid({ name, email, date, time }).then((data) => {
-        data ? addToList(name, email, date, time) : alert("Invalid data");
+        // data
+        //   ? addToList(name, email, date, time)
+        //   : setErrorMessage("Invalid Data");
+        // console.log(name);
+        // console.log(nameToInt);
+
+        if (data) {
+          addToList(name, email, date, time);
+          setErrorMessage("");
+          setSentMessage("");
+        } else if (!data.name) {
+          setErrorMessage("Data is invalid");
+          setSentMessage("");
+        } else if (!data.email) {
+          setErrorMessage("Data is invalid");
+          setSentMessage("");
+        } else if (!data.date) {
+          setErrorMessage("Data is invalid");
+          setSentMessage("");
+        } else if (!data.time) {
+          setErrorMessage("Data is invalid");
+          setSentMessage("");
+        } else {
+          setErrorMessage("Data is invalid");
+          setSentMessage("");
+        }
       });
     } else {
-      alert("Please write in data");
+      setErrorMessage("Data is required");
+      setSentMessage("");
     }
   };
 
@@ -61,20 +97,19 @@ const RegistrationForm = () => {
         <StyledInputContainer>
           <StyledLabel htmlFor="name">Full Name:</StyledLabel>
           <StyledInput type="text" name="name" placeholder="Name" />
-          {/* <StyledErrorMessage>{formErrors.name}</StyledErrorMessage> */}
         </StyledInputContainer>
 
         <StyledInputContainer>
           <StyledLabel htmlFor="email">Email:</StyledLabel>
           <StyledInput type="text" name="email" placeholder="Email" />
-          {/* <StyledErrorMessage>{formErrors.email}</StyledErrorMessage> */}
         </StyledInputContainer>
         <StyledLabel htmlFor="time">Date and time:</StyledLabel>
         <StyledInputDateContainer>
           <StyledDateInput type="date" name="date" />
           <StyledDateInput type="time" name="time" />
         </StyledInputDateContainer>
-        {/* <StyledErrorMessage>{formErrors.date}</StyledErrorMessage> */}
+        <StyledConfirmationMessage>{sentMessage}</StyledConfirmationMessage>
+        <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
 
         <StyledCenteredElements>
           <Button color={"var(--blue)"} text={"Save"} padding={"8px 0px"} />

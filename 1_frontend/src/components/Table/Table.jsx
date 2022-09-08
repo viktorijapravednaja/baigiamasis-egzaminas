@@ -2,10 +2,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 // Styles
-import { StyledTable, StyledTd, StyledTh } from "./Table.style";
+import { StyledTable, StyledTh, StyledTr } from "./Table.style";
 
 // Components
-import { Button } from "../Button/Button";
+import { TableCell } from "../TableCell/TableCell";
 
 export const Table = () => {
   const [data, setData] = useState([]);
@@ -14,49 +14,37 @@ export const Table = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:5000/customers").then((res) => {
-      if (!res.data) {
-        setError("An error have occured.");
-      }
-      return setData(res.data.customer);
-    });
-
-    console.log(data);
+    axios
+      .get("http://localhost:5000/customers")
+      .then((res) => {
+        return setData(res.data.customer);
+      })
+      .catch((err) => {
+        setError("An error has occured.");
+      });
   }, []);
 
-  const deleteCustomer = (id) => {
-    axios.delete("http://localhost:5000/delete", { id }).then((res) => {
-      alert(res.data);
-    });
-  };
   return (
     <StyledTable>
       <tbody>
-        <tr>
+        <StyledTr>
           <StyledTh> Full Name</StyledTh>
           <StyledTh>Email</StyledTh>
           <StyledTh>Date</StyledTh>
           <StyledTh>Time</StyledTh>
-        </tr>
+        </StyledTr>
         {data &&
           data.map((d) => {
             return (
-              <tr key={d._id}>
-                <StyledTd>{d.name}</StyledTd>
-                <StyledTd>{d.email}</StyledTd>
-                <StyledTd>{d.date}</StyledTd>
-                <StyledTd>{d.time}</StyledTd>
-                <td>
-                  <Button text="Update" color={"#00674C"} />
-                </td>
-                <td>
-                  <Button
-                    onCLick={deleteCustomer(d._id)}
-                    text="Delete"
-                    color={"#7D1713"}
-                  />
-                </td>
-              </tr>
+              <StyledTr key={d._id}>
+                <TableCell
+                  name={d.name}
+                  email={d.email}
+                  date={d.date}
+                  time={d.time}
+                  id={d._id}
+                />
+              </StyledTr>
             );
           })}
       </tbody>

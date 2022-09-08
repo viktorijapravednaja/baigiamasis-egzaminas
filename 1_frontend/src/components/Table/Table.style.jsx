@@ -1,29 +1,35 @@
 import styled from "styled-components";
 
 export const StyledTable = styled.table`
-  width: 100%;
+  width: 95%;
   text-align: center;
   margin: 0 auto;
-  font-size: 12px;
+  font-size: 10px;
   margin-top: 2rem;
-
+  background: #f5f5f6;
+  border-radius: 10px;
+  border-collapse: collapse;
+  box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
   @media screen and (min-width: 481px) {
-    width: 80%;
     font-size: var(--font-size3);
     margin-top: 4rem;
   }
 `;
 
-export const StyledTd = styled.td`
-  padding: 0.5rem;
-`;
-
 export const StyledTh = styled.th`
   font-weight: 400;
-  color: #fff;
-  padding: 0.5rem;
+  padding: 0.1rem 0.2rem;
   border: none;
-  border-radius: 8px;
+  @media screen and (min-width: 481px) {
+    padding: 0.6rem;
+  }
+`;
 
-  background-color: var(--black);
+export const StyledTr = styled.tr`
+  border-top: 1px solid var(--black);
+  border-collapse: collapse;
+
+  &:first-child {
+    border: none;
+  }
 `;

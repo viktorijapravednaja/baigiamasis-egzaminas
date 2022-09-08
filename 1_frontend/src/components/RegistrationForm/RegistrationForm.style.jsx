@@ -79,3 +79,8 @@ export const StyledErrorMessage = styled.p`
   color: #ab0501;
   padding-top: 8px;
 `;
+
+export const StyledConfirmationMessage = styled.p`
+  color: #005945;
+  padding-top: 8px;
+`;

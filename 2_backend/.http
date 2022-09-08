@@ -3,19 +3,26 @@ POST http://localhost:5000/register
 content-type: application/json
 
 {
-    "name": "jpne zeba kalmaite",
-    "email": "zajabys@email.com",
-    "date": "200-22-22",
+    "name": "jonesdfsdessssssssssss abejone",
+    "email": "aal@koskndfdel.com",
+    "date": "2002-22-22",
     "time":"18:22"
 }
 
 
 ###
-DELETE  http://localhost:5000/delete
+DELETE  http://localhost:5000/customer/6319ac18663eb5ae829e9967
 content-type: application/json
-{
-   "_id": "6318d34e786cebe760bc31d0",
-}
+
 
 ###
 GET http://localhost:5000/customers
+
+###
+PUT http://localhost:5000/customer/6319faa396bc999dd9bcd449
+content-type: application/json
+
+{
+    "date": "22s0-20", 
+    "time": "ssa"
+}
