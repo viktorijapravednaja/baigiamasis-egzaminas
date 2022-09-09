@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 // Styles
-import { StyledTable, StyledTh, StyledTr } from "./Table.style";
+import { StyledTable, StyledTh, StyledTr, StyledH2 } from "./Table.style";
 
 // Components
 import { TableCell } from "../TableCell/TableCell";
@@ -17,12 +17,21 @@ export const Table = () => {
     axios
       .get("http://localhost:5000/customers")
       .then((res) => {
+        setLoading(false);
         return setData(res.data.customer);
       })
       .catch((err) => {
         setError("An error has occured.");
       });
   }, []);
+
+  if (loading) {
+    return <StyledH2>Loading...</StyledH2>;
+  }
+
+  if (error) {
+    return <StyledH2>{error}</StyledH2>;
+  }
 
   return (
     <StyledTable>

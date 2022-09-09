@@ -10,7 +10,7 @@ PORT = process.env.PORT || 5000;
 const connectMongoDB = require("./config/db.js");
 const Customer = require("./models/Customer.model.js");
 
-// -- connecting DB
+//Connecting DB
 connectMongoDB();
 
 //Middlewares
@@ -57,49 +57,6 @@ app.get(
     }
   })
 );
-
-// app.put("/customer/:id", async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const updateDate = req.body;
-//     await Customer.findByIdAndUpdate(id, updateDate);
-//     const updatedCustomer = await Customer.findById(id);
-//     console.log(updatedCustomer);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-// app.put("/kids/:id", async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const updateData = req.body;
-
-//     await Kid.findByIdAndUpdate(id, updateData);
-//     const updatedKid = await Kid.findById(id);
-
-//     console.log(updatedKid);
-//     res.json(updatedKid);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
-app.put("/customer/:id", async (req, res) => {
-  // const newTime = req.body.newTime;
-  // const id = req.body.id;
-  // Customer.findById(id, ())
-  // const id = req.body.id;
-  // try {
-  //   const id = req.body.id;
-  //   const updateData = req.body;
-  //   await Customer.findByIdAndUpdate(id, updateData);
-  //   const updatedCustomer = await Customer.findById(id);
-  //   console.log(updatedCustomer);
-  //   res.json(updatedCustomer);
-  // } catch (error) {
-  //   console.log(error);
-  // }
-});
 
 app.delete(
   "/customer/:id",

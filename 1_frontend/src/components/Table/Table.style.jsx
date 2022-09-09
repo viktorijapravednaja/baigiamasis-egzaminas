@@ -33,3 +33,9 @@ export const StyledTr = styled.tr`
     border: none;
   }
 `;
+
+export const StyledH2 = styled.h2`
+  text-align: center;
+  font-weight: 200;
+  margin: 1rem 0;
+`;
