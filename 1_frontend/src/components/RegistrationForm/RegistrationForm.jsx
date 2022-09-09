@@ -48,34 +48,28 @@ const RegistrationForm = () => {
     const time = e.target.elements.time.value.trim();
     if (name && email && date && time) {
       const schema = Yup.object().shape({
-        name: Yup.string().required(),
+        name: Yup.string().min(3).max(255).required(),
         email: Yup.string().email().max(255).min(5).required(),
         date: Yup.string().required(),
         time: Yup.string().required(),
       });
 
       schema.isValid({ name, email, date, time }).then((data) => {
-        // data
-        //   ? addToList(name, email, date, time)
-        //   : setErrorMessage("Invalid Data");
-        // console.log(name);
-        // console.log(nameToInt);
-
         if (data) {
           addToList(name, email, date, time);
           setErrorMessage("");
           setSentMessage("");
         } else if (!data.name) {
-          setErrorMessage("Data is invalid");
+          setErrorMessage("Full Name is invalid");
           setSentMessage("");
         } else if (!data.email) {
-          setErrorMessage("Data is invalid");
+          setErrorMessage("Email is invalid");
           setSentMessage("");
         } else if (!data.date) {
-          setErrorMessage("Data is invalid");
+          setErrorMessage("Date is invalid");
           setSentMessage("");
         } else if (!data.time) {
-          setErrorMessage("Data is invalid");
+          setErrorMessage("Time is invalid");
           setSentMessage("");
         } else {
           setErrorMessage("Data is invalid");
